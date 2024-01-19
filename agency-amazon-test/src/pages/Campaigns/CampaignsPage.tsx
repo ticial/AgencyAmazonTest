@@ -1,9 +1,12 @@
 import { getCampaignsData } from "@/api/campaignApi";
-import TableWidget, { TableWidgetValues } from "@/components/TableWidget/TableWidget";
+import TableRow from "@/components/Table/TableRow/TableRow";
+import TableWidget from "@/components/TableWidget/TableWidget";
 import { QueryParams } from "@/types/types";
 import { addWithoutNull } from "@/utils/arrayFuncs";
 import { DateIntervalFilter, Filter, NumberIntervalFilter, cloneFilterIfLimitChanged } from "@/utils/filters";
 import moment from "moment";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const headerNames = { id: "ID", clicks: "Clicks", cost: "Cost", date: "Date" };
 const dateFilter = new DateIntervalFilter("date", "Date Range");
@@ -13,8 +16,12 @@ const defaultFilters = [dateFilter.clone(), clicksFilter.clone(), costFilter.clo
 
 const CampaignsPage: React.FC = () => {
   console.log("CampaignsPage");
+  const navigate = useNavigate();
+  const [total, setTotal] = useState(0);
+  const [filtersParams, setFiltersParams] = useState<Filter[]>(defaultFilters);
+  const [valuesList, setValuesList] = useState<string[][]>([]);
 
-  const getValues = async (params: QueryParams) => {
+  const loadValues = async (params: QueryParams) => {
     try {
       const { items, total, dateRange, clicksRange, costRange } = await getCampaignsData(params);
       const values = items.map(item => [
@@ -23,22 +30,26 @@ const CampaignsPage: React.FC = () => {
         `$${item.cost}.00`,
         moment(item.date).format("ll"),
       ]);
-      const result = { values, total, filters: undefined } as TableWidgetValues;
+      setValuesList(values);
+      setTotal(total);
+
       const filters: Filter[] = [];
       addWithoutNull(filters, cloneFilterIfLimitChanged(dateFilter, dateRange));
       addWithoutNull(filters, cloneFilterIfLimitChanged(clicksFilter, clicksRange));
       addWithoutNull(filters, cloneFilterIfLimitChanged(costFilter, costRange));
-
-      if (filters.length > 0) result.filters = filters;
-
-      return result;
+      if (filters.length > 0) setFiltersParams(filters);
     } catch (error) {
       console.log(error);
     }
     return { values: [], total: 0, filters: [] };
   };
-
-  return <TableWidget title="Campaigns" headerNames={headerNames} getValues={getValues} filters={defaultFilters} />;
+  return (
+    <TableWidget title="Campaigns" total={total} headerNames={headerNames} onChange={loadValues} filtersParams={filtersParams}>
+      {valuesList.map(values => (
+        <TableRow key={values[0]} values={values} onClick={() => navigate("/campaigns/" + values[0])} />
+      ))}
+    </TableWidget>
+  );
 };
 
 export default CampaignsPage;

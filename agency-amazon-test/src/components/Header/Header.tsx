@@ -13,17 +13,17 @@ const Header = () => {
         <div className="collapse navbar-collapse" id="mynavbar">
           <ul className="navbar-nav me-auto">
             <li className="nav-item">
-              <Link className="nav-link" to="/account">
+              <Link className="nav-link" to="/account" reloadDocument>
                 Accounts
               </Link>
             </li>
             <li className="nav-item">
-              <Link className="nav-link" to="/profile">
+              <Link className="nav-link" to="/profile" reloadDocument>
                 Profiles
               </Link>
             </li>
             <li className="nav-item">
-              <Link className="nav-link" to="/campaign">
+              <Link className="nav-link" to="/campaign" reloadDocument>
                 Camaigns
               </Link>
             </li>
