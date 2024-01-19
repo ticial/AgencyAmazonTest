@@ -2,7 +2,7 @@ import { DateIntervalFilter } from "@/utils/filters";
 import DatePicker, { DateObject } from "react-multi-date-picker";
 import FilterBase from "../FilterBase/FilterBase";
 import { useEffect, useState } from "react";
-import { Interval } from "@/utils/range";
+import { Interval } from "@/utils/interval";
 
 interface DateRangeFilterProps {
   label: string;

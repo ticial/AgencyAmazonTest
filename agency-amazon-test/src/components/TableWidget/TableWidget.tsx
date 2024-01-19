@@ -22,12 +22,10 @@ const TableWidget = ({ title, total, headerNames, filtersParams = [], children, 
 
   const changeSort = (value: string) => {
     setOffset(0);
-    console.log("changeSort");
     setSort(value);
   };
 
   const changeOffset = (value: number) => {
-    console.log("changeOffset");
     setOffset(value);
   };
 
@@ -35,8 +33,6 @@ const TableWidget = ({ title, total, headerNames, filtersParams = [], children, 
     setFilters(filters => {
       const idx = filters.findIndex(el => el.prop === filter.prop);
       if (idx !== -1 && filters[idx].equals(filter)) return filters;
-      console.log("addFilter");
-
       setOffset(0);
       return [...filters.slice(0, idx), filter, ...filters.slice(idx + 1)];
     });
@@ -45,10 +41,6 @@ const TableWidget = ({ title, total, headerNames, filtersParams = [], children, 
   const handleChange = () => {
     onChange({ offset, count, sort, filters });
   };
-
-  useEffect(() => {
-    console.log("reload");
-  }, []);
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(handleChange, [offset, count, sort, filters]);

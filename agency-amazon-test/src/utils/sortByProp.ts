@@ -1,8 +1,8 @@
 import { StringPropsObject } from "@/types/types";
 
 export function sortStrings(a: string, b: string) {
-  const propA = a.toUpperCase();
-  const propB = b.toUpperCase();
+  const propA = a.toLowerCase();
+  const propB = b.toLowerCase();
 
   if (propA < propB) {
     return -1;

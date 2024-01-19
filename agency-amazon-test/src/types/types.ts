@@ -1,4 +1,5 @@
 import { Filter } from "@/utils/filters";
+import { PropValue } from "@/utils/propValue";
 
 export type Account = {
   id: number;
@@ -25,7 +26,7 @@ export type Campaign = {
 export type StringPropsObject = { [K in string]: unknown };
 
 export interface QueryParams {
-  query?: string;
+  value?: PropValue;
   sort?: string;
   filters?: Filter[];
   offset?: number;

@@ -1,4 +1,4 @@
-import { Interval } from "./range";
+import { Interval } from "./interval";
 
 export interface Filter {
   type: FilterTypes;

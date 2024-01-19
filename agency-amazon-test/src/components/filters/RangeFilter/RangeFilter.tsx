@@ -1,7 +1,7 @@
 import { NumberIntervalFilter } from "@/utils/filters";
 import FilterBase from "../FilterBase/FilterBase";
 import { useEffect, useState } from "react";
-import { Interval } from "@/utils/range";
+import { Interval } from "@/utils/interval";
 import useDebounce from "@/hooks/useDebounce";
 
 interface RangeFilterProps {
