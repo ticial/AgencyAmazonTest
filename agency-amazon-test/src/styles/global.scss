@@ -1,0 +1,21 @@
+@import "bootstrap";
+
+.pointer {
+  cursor: pointer;
+}
+
+.rmdp-container {
+  width: 100%;
+
+  .rmdp-input {
+    width: 100%;
+    background: none;
+    border: 0;
+
+    &:focus {
+      border: 0;
+      outline: 0;
+      box-shadow: none;
+    }
+  }
+}

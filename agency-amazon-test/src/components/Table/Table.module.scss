@@ -1,0 +1,36 @@
+@mixin arrowBase {
+  content: "";
+  height: 0;
+  width: 0;
+  position: absolute;
+  right: 4px;
+  border-left: 4px solid transparent;
+  border-right: 4px solid transparent;
+  opacity: 0.2;
+}
+
+.tableSorter {
+  width: 100%;
+  position: relative;
+  color: inherit;
+  border: 0;
+  background-color: inherit;
+  cursor: pointer;
+  text-align: inherit;
+  font-weight: inherit;
+  font-size: inherit;
+  padding: 0;
+
+  &::after {
+    @include arrowBase;
+    border-bottom: 4px solid #000;
+    border-top: 4px solid transparent;
+    top: 0px;
+  }
+
+  &::before {
+    @include arrowBase;
+    border-top: 4px solid #000;
+    bottom: 0px;
+  }
+}
