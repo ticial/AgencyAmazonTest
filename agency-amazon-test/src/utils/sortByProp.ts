@@ -1,5 +1,3 @@
-import { StringPropsObject } from "@/types/types";
-
 export function sortStrings(a: string, b: string) {
   const propA = a.toLowerCase();
   const propB = b.toLowerCase();
@@ -13,7 +11,7 @@ export function sortStrings(a: string, b: string) {
   return 0;
 }
 
-export function sortByProp(prop: string, array: StringPropsObject[]) {
+export function sortByProp(prop: string, array: Record<string, string | number>[]) {
   const descending = prop.startsWith("-");
   if (descending) prop = prop.slice(1);
 

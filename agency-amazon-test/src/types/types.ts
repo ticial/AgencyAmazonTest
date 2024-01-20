@@ -23,8 +23,6 @@ export type Campaign = {
   profileId: number;
 };
 
-export type StringPropsObject = { [K in string]: unknown };
-
 export interface QueryParams {
   value?: PropValue;
   sort?: string;
