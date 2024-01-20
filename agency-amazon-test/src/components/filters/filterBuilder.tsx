@@ -1,4 +1,4 @@
-import { DateIntervalFilter, Filter, FilterTypes, NumberIntervalFilter } from "@/utils/filters";
+import { DateIntervalFilter, Filter, FilterTypes, NumberIntervalFilter } from "@/types/filters";
 import StringFilter from "./StringFilter/StringFilter";
 import RangeFilter from "./RangeFilter/RangeFilter";
 import DateRangeFilter from "./DateRangeFilter/DateRangeFilter";

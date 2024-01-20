@@ -1,4 +1,6 @@
 import { XCircleFill } from "react-bootstrap-icons";
+import styles from "./FilterBase.module.scss";
+import { cn } from "@/utils/cn";
 
 interface FilterBaseProps {
   label: string;
@@ -10,8 +12,8 @@ interface FilterBaseProps {
 
 const FilterBase = ({ label, id, children, onReset, resetDisabled = false }: FilterBaseProps) => {
   return (
-    <div className="input-group w-50">
-      <label className="input-group-text" htmlFor={id}>
+    <div className={cn(styles.filter, "input-group")}>
+      <label className={cn(styles.label, "input-group-text")} htmlFor={id}>
         {label}
       </label>
       {children}

@@ -1,14 +1,14 @@
-import { NumberIntervalFilter } from "@/utils/filters";
+import { NumberIntervalFilter } from "@/types/filters";
 import FilterBase from "../FilterBase/FilterBase";
 import { useEffect, useState } from "react";
-import { Interval } from "@/utils/interval";
+import MinMax from "@/types/MinMax";
 import useDebounce from "@/hooks/useDebounce";
 
 interface RangeFilterProps {
   label: string;
   prop: string;
-  maxInterval: Interval;
-  interval: Interval;
+  maxInterval: MinMax;
+  interval: MinMax;
   onChange: (filter: NumberIntervalFilter) => void;
 }
 
@@ -21,7 +21,7 @@ const RangeFilter = ({ label, prop, maxInterval, interval: defaultInterval, onCh
   const checkDisabled = () => setResetDisabled(maxInterval.min === interval.min && maxInterval.max === interval.max);
 
   const setRange = (min: number, max: number) => {
-    setInterval(new Interval(min, max).normalize());
+    setInterval(new MinMax(min, max).normalize());
     debounce(() => {
       onChange(new NumberIntervalFilter(prop, label, min, max, maxInterval.min, maxInterval.max));
     });

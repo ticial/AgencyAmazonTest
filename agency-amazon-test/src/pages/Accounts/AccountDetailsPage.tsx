@@ -1,5 +1,5 @@
 import { getAccount } from "@/api/accountsApi";
-import ProfilesTable from "@/components/ProfilesTable/ProfilesTable";
+import ProfilesTable from "@/pages/Profiles/ProfilesTable/ProfilesTable";
 import { Account } from "@/types/types";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
@@ -14,6 +14,7 @@ const AccountDetailsPage = () => {
     getAccount(id).then(account => {
       setAccount(account);
     });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return <ProfilesTable title={title} accountId={id} />;

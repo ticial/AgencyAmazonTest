@@ -1,4 +1,4 @@
-import CampaignsTable from "@/components/CampaignsTable/CampaignsTable";
+import CampaignsTable from "@/pages/Campaigns/CampaignsTable/CampaignsTable";
 
 const CampaignsPage = () => {
   return <CampaignsTable title="Campaigns" />;

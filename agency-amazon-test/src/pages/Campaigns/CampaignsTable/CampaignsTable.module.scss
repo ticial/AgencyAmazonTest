@@ -1,0 +1,17 @@
+.row td {
+  &:nth-child(1) {
+    min-width: 80px;
+  }
+
+  &:nth-child(2) {
+    width: 50%;
+  }
+
+  &:nth-child(3) {
+    width: 50%;
+  }
+
+  &:nth-child(4) {
+    min-width: 200px;
+  }
+}

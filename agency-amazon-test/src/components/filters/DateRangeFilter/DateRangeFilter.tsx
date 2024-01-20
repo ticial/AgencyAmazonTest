@@ -1,14 +1,14 @@
-import { DateIntervalFilter } from "@/utils/filters";
+import { DateIntervalFilter } from "@/types/filters";
 import DatePicker, { DateObject } from "react-multi-date-picker";
 import FilterBase from "../FilterBase/FilterBase";
 import { useEffect, useState } from "react";
-import { Interval } from "@/utils/interval";
+import MinMax from "@/types/MinMax";
 
 interface DateRangeFilterProps {
   label: string;
   prop: string;
-  maxInterval: Interval;
-  interval: Interval;
+  maxInterval: MinMax;
+  interval: MinMax;
   onChange: (filter: DateIntervalFilter) => void;
 }
 
@@ -24,7 +24,7 @@ const DateRangeFilter = ({ label, prop, maxInterval, interval: defaultInterval, 
     if (!Array.isArray(values)) return;
     const [min, max] = values;
     if (min === undefined || max === undefined) return;
-    const interval = new Interval(timeOf(min), timeOf(max)).normalize();
+    const interval = new MinMax(timeOf(min), timeOf(max)).normalize();
     setInterval(interval);
     onChange(new DateIntervalFilter(prop, label, interval.min, interval.max, maxInterval.min, maxInterval.max));
   };

@@ -3,7 +3,8 @@ import Paginator from "../Paginator/Paginator";
 import Table from "../Table/Table";
 import { QueryParams } from "@/types/types";
 import { filterBuilder } from "../filters/filterBuilder";
-import { Filter } from "@/utils/filters";
+import { Filter } from "@/types/filters";
+import { TABLE_ROW_COUNT } from "@/constants";
 
 interface TableWidgetProps {
   title: string;
@@ -18,7 +19,7 @@ const TableWidget = ({ title, total, headerNames, filtersParams = [], children, 
   const [filters, setFilters] = useState<Filter[]>(filtersParams);
   const [sort, setSort] = useState("id");
   const [offset, setOffset] = useState(0);
-  const count = 10;
+  const count = TABLE_ROW_COUNT;
 
   const changeSort = (value: string) => {
     setOffset(0);

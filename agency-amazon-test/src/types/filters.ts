@@ -1,4 +1,4 @@
-import { Interval } from "./interval";
+import MinMax from "./MinMax";
 
 export interface Filter {
   type: FilterTypes;
@@ -63,6 +63,8 @@ export class NumberIntervalFilter extends BaseFilter {
   setValues(start: number, end: number) {
     this.start = start;
     this.end = end;
+    this.min = Math.min(start, this.min);
+    this.max = Math.max(end, this.max);
   }
 
   setLimit(min: number, max: number) {
@@ -81,11 +83,11 @@ export class NumberIntervalFilter extends BaseFilter {
   }
 
   getInterval() {
-    return new Interval(this.start, this.end);
+    return new MinMax(this.start, this.end);
   }
 
   getLimitInterval() {
-    return new Interval(this.min, this.max);
+    return new MinMax(this.min, this.max);
   }
 
   clone() {
@@ -93,7 +95,7 @@ export class NumberIntervalFilter extends BaseFilter {
   }
 }
 
-export function cloneFilterIfLimitChanged<T extends NumberIntervalFilter>(oldFilter: T, limit: Interval): T | null {
+export function cloneFilterIfLimitChanged<T extends NumberIntervalFilter>(oldFilter: T, limit: MinMax): T | null {
   if (oldFilter.min !== limit.min || oldFilter.max !== limit.max) {
     oldFilter.setLimit(limit.min, limit.max);
     return oldFilter.clone() as T;

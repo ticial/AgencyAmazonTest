@@ -1,5 +1,5 @@
-import { Filter } from "@/utils/filters";
-import { PropValue } from "@/utils/propValue";
+import { Filter } from "@/types/filters";
+import PropValue from "@/types/PropValue";
 
 export type Account = {
   id: number;

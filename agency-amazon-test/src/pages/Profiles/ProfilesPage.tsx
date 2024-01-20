@@ -1,4 +1,4 @@
-import ProfilesTable from "@/components/ProfilesTable/ProfilesTable";
+import ProfilesTable from "@/pages/Profiles/ProfilesTable/ProfilesTable";
 
 const ProfilesPage = () => {
   return <ProfilesTable title="Profiles" />;

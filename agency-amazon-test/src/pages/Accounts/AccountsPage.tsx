@@ -1,4 +1,4 @@
-import AccountsTable from "@/components/AccountsTable/AccountsTable";
+import AccountsTable from "@/pages/Accounts/AccountsTable/AccountsTable";
 
 const AccountsPage = () => {
   return <AccountsTable />;

@@ -3,10 +3,11 @@ import TableRow from "@/components/Table/TableRow/TableRow";
 import TableWidget from "@/components/TableWidget/TableWidget";
 import { QueryParams } from "@/types/types";
 import { addWithoutNull } from "@/utils/arrayFuncs";
-import { DateIntervalFilter, Filter, NumberIntervalFilter, cloneFilterIfLimitChanged } from "@/utils/filters";
-import { PropValue } from "@/utils/propValue";
+import { DateIntervalFilter, Filter, NumberIntervalFilter, cloneFilterIfLimitChanged } from "@/types/filters";
+import PropValue from "@/types/PropValue";
 import moment from "moment";
 import { useState } from "react";
+import styles from "./CampaignsTable.module.scss";
 
 const headerNames = { id: "ID", clicks: "Clicks", cost: "Cost", date: "Date" };
 const dateFilter = new DateIntervalFilter("date", "Date Range");
@@ -50,7 +51,7 @@ const CampaignsTable = ({ profileId, title }: CampaignsTableProps) => {
   return (
     <TableWidget title={title} total={total} headerNames={headerNames} onChange={loadValues} filtersParams={filtersParams}>
       {valuesList.map(values => (
-        <TableRow key={values[0]} values={values} />
+        <TableRow classname={styles.row} key={values[0]} values={values} />
       ))}
     </TableWidget>
   );

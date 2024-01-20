@@ -1,5 +1,5 @@
 import useDebounce from "@/hooks/useDebounce";
-import { StartStringFilter } from "@/utils/filters";
+import { StartStringFilter } from "@/types/filters";
 import FilterBase from "../FilterBase/FilterBase";
 import { useEffect, useState } from "react";
 

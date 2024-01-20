@@ -2,10 +2,11 @@ import { getProfilesData } from "@/api/profilesApi";
 import TableRow from "@/components/Table/TableRow/TableRow";
 import TableWidget from "@/components/TableWidget/TableWidget";
 import { QueryParams } from "@/types/types";
-import { StartStringFilter } from "@/utils/filters";
-import { PropValue } from "@/utils/propValue";
+import { StartStringFilter } from "@/types/filters";
+import PropValue from "@/types/PropValue";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import styles from "./ProfilesTable.module.scss";
 
 const headerNames = { id: "ID", country: "Country", marketplace: "Marketplace" };
 const countryFilter = new StartStringFilter("country", "Search Country");
@@ -37,7 +38,7 @@ const ProfilesTable = ({ accountId, title }: ProfilesTableProps) => {
   return (
     <TableWidget title={title} total={total} headerNames={headerNames} onChange={loadValues} filtersParams={defaultFilters}>
       {valuesList.map(values => (
-        <TableRow key={values[0]} values={values} onClick={() => navigate("/profile/" + values[0])} />
+        <TableRow classname={styles.row} key={values[0]} values={values} onClick={() => navigate("/profile/" + values[0])} />
       ))}
     </TableWidget>
   );

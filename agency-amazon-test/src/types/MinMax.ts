@@ -1,4 +1,4 @@
-export class Interval {
+export default class MinMax {
   constructor(public min = Number.MAX_SAFE_INTEGER, public max = Number.MIN_SAFE_INTEGER) {}
 
   normalize() {
@@ -14,5 +14,5 @@ export class Interval {
     if (this.max < value) this.max = value;
   }
 
-  equals = (other: Interval) => this.min === other.min && this.max === other.max;
+  equals = (other: MinMax) => this.min === other.min && this.max === other.max;
 }
