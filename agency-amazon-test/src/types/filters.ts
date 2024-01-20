@@ -95,7 +95,11 @@ export class NumberIntervalFilter extends BaseFilter {
   }
 }
 
-export function cloneFilterIfLimitChanged<T extends NumberIntervalFilter>(oldFilter: T, limit: MinMax): T | null {
+export function cloneFilterIfLimitChanged<T extends NumberIntervalFilter>(
+  oldFilter: T | null | undefined,
+  limit: MinMax,
+): T | null {
+  if (!oldFilter) return null;
   if (oldFilter.min !== limit.min || oldFilter.max !== limit.max) {
     oldFilter.setLimit(limit.min, limit.max);
     return oldFilter.clone() as T;

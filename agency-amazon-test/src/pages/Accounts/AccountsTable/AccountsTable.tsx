@@ -10,13 +10,13 @@ import styles from "./AccountsTable.module.scss";
 
 const headerNames = { id: "ID", email: "Email", authToken: "Auth Token", creationDate: "Creation Date" };
 const emailFilter = new StartStringFilter("email", "Search Email");
-const dateFilter = new DateIntervalFilter("creationDate", "Date Range");
-const defaultFilters = [emailFilter, dateFilter.clone()];
+const defaultDateFilter = new DateIntervalFilter("creationDate", "Date Range");
 
 const AccountsTable = () => {
   const navigate = useNavigate();
   const [total, setTotal] = useState(0);
-  const [filtersParams, setFiltersParams] = useState<Filter[]>(defaultFilters);
+  const [dateFilter, setDateFilter] = useState(defaultDateFilter);
+  const [filtersParams, setFiltersParams] = useState<Filter[]>([emailFilter, defaultDateFilter]);
   const [valuesList, setValuesList] = useState<string[][]>([]);
 
   const loadValues = async (params?: QueryParams) => {
@@ -25,8 +25,12 @@ const AccountsTable = () => {
       const values = items.map(item => [String(item.id), item.email, item.authToken, moment(item.creationDate).format("ll")]);
       setValuesList(values);
       setTotal(total);
+
       const updatedDateFilter = cloneFilterIfLimitChanged(dateFilter, dateRange);
-      if (updatedDateFilter) setFiltersParams([emailFilter, updatedDateFilter]);
+      if (updatedDateFilter) {
+        setDateFilter(updatedDateFilter);
+        setFiltersParams([emailFilter, updatedDateFilter]);
+      }
     } catch (error) {
       console.log(error);
     }

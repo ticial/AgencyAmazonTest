@@ -13,7 +13,6 @@ const headerNames = { id: "ID", clicks: "Clicks", cost: "Cost", date: "Date" };
 const dateFilter = new DateIntervalFilter("date", "Date Range");
 const clicksFilter = new NumberIntervalFilter("clicks", "Clicks Range");
 const costFilter = new NumberIntervalFilter("cost", "Cost Range");
-const defaultFilters = [dateFilter.clone(), clicksFilter.clone(), costFilter.clone()];
 
 interface CampaignsTableProps {
   title: string;
@@ -22,8 +21,10 @@ interface CampaignsTableProps {
 
 const CampaignsTable = ({ profileId, title }: CampaignsTableProps) => {
   const [total, setTotal] = useState(0);
-  const [filtersParams, setFiltersParams] = useState<Filter[]>(defaultFilters);
+  const [filtersParams, setFiltersParams] = useState<Filter[]>([dateFilter, clicksFilter, costFilter]);
   const [valuesList, setValuesList] = useState<string[][]>([]);
+
+  const getSameFilter = <T extends Filter>(filter: T) => filtersParams.find(el => el.prop === filter.prop) as T | undefined;
 
   const loadValues = async (params: QueryParams) => {
     try {
@@ -39,9 +40,9 @@ const CampaignsTable = ({ profileId, title }: CampaignsTableProps) => {
       setTotal(total);
 
       const filters: Filter[] = [];
-      addWithoutNull(filters, cloneFilterIfLimitChanged(dateFilter, dateRange));
-      addWithoutNull(filters, cloneFilterIfLimitChanged(clicksFilter, clicksRange));
-      addWithoutNull(filters, cloneFilterIfLimitChanged(costFilter, costRange));
+      addWithoutNull(filters, cloneFilterIfLimitChanged(getSameFilter(dateFilter), dateRange));
+      addWithoutNull(filters, cloneFilterIfLimitChanged(getSameFilter(clicksFilter), clicksRange));
+      addWithoutNull(filters, cloneFilterIfLimitChanged(getSameFilter(costFilter), costRange));
       if (filters.length > 0) setFiltersParams(filters);
     } catch (error) {
       console.log(error);

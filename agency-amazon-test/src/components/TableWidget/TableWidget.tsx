@@ -48,6 +48,7 @@ const TableWidget = ({ title, total, headerNames, filtersParams = [], children, 
 
   const filtersGroup = useMemo(
     () => filtersParams.map(filter => <div key={filter.prop}>{filterBuilder(filter, changeFilter)}</div>),
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     [filtersParams],
   );
 
