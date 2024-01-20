@@ -24,7 +24,7 @@ const DateRangeFilter = ({ label, prop, maxInterval, interval: defaultInterval, 
     if (!Array.isArray(values)) return;
     const [min, max] = values;
     if (min === undefined || max === undefined) return;
-    const interval = new MinMax(timeOf(min), timeOf(max)).normalize();
+    const interval = new MinMax(timeOf(min), timeOf(max));
     setInterval(interval);
     onChange(new DateIntervalFilter(prop, label, interval.min, interval.max, maxInterval.min, maxInterval.max));
   };

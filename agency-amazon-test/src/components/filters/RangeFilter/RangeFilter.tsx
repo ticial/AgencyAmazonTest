@@ -21,7 +21,7 @@ const RangeFilter = ({ label, prop, maxInterval, interval: defaultInterval, onCh
   const checkDisabled = () => setResetDisabled(maxInterval.min === interval.min && maxInterval.max === interval.max);
 
   const setRange = (min: number, max: number) => {
-    setInterval(new MinMax(min, max).normalize());
+    setInterval(new MinMax(min, max));
     debounce(() => {
       onChange(new NumberIntervalFilter(prop, label, min, max, maxInterval.min, maxInterval.max));
     });
